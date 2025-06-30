@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kamus Makanan Minangkabau</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fdfaf5;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #b32d00;
+    }
+    form input[type="text"] {
+      padding: 10px;
+      width: 70%;
+      font-size: 16px;
+    }
+    form button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #b32d00;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .result, .notfound {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 6px;
+    }
+    .label {
+      font-weight: bold;
+      color: #333;
+      margin-top: 10px;
+      display: block;
+    }
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📘 Kamus Makanan Minangkabau</h1>
+
+  <form method="POST">
+    <input type="text" name="kata" placeholder="Masukkan nama makanan..." required>
+    <button type="submit">Cari</button>
+  </form>
+
+  {% if hasil %}
+    <div class="result">
+      <p><span class="label">🍽️ Nama Makanan:</span> {{ kata }}</p>
+      <p><span class="label">📖 Arti:</span> {{ hasil.arti }}</p>
+      <p><span class="label">📝 Deskripsi:</span> {{ hasil.deskripsi }}</p>
+      <p><span class="label">💬 Contoh Penggunaan:</span></p>
+      <ul>
+        {% for c in hasil.contoh %}
+          <li>{{ c }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% elif tidak_ditemukan %}
+    <div class="notfound">
+      <p>❌ Makanan tidak ditemukan dalam kamus.</p>
+    </div>
+  {% endif %}
+
+</body>
+</html>
